@@ -21,7 +21,6 @@ const TaskForm = ({ kisiler, submitFn }) => {
     people: [],
   });
 
-  // yup error stateleri
   const [formErrors, setFormErrors] = useState({
     title: "",
     description: "",
@@ -30,12 +29,10 @@ const TaskForm = ({ kisiler, submitFn }) => {
 
   const [buttonDisabled, setButtonDisabled] = useState(true);
 
-  // form datası her güncellendiğinde valid mi diye kontrol et
   useEffect(() => {
     formSemasi.isValid(formData).then((valid) => setButtonDisabled(!valid));
   }, [formData]);
 
-  // yup form alani her değiştiğinde çalışan kontrol fonksiyonu
   function formAlaniniKontrolEt(name, value) {
     Yup.reach(formSemasi, name)
       .validate(value)
@@ -53,7 +50,6 @@ const TaskForm = ({ kisiler, submitFn }) => {
       });
   }
 
-  // checkboxların değişimini state içerisine eklemek için özel fonksiyon
   function handleCheckboxChange(e) {
     const { value } = e.target;
 
@@ -72,8 +68,6 @@ const TaskForm = ({ kisiler, submitFn }) => {
     });
   }
 
-
-  // diğer form alanları değiştikçe çalışan ve yeni değeri state'e ekleyen fonksiyon
   function handleOthersChange(e) {
     const { name, value } = e.target;
     formAlaniniKontrolEt(name, value);
@@ -83,7 +77,6 @@ const TaskForm = ({ kisiler, submitFn }) => {
     });
   }
 
-  // task ekleme
   function handleSubmit(e) {
     e.preventDefault();
     submitFn({
